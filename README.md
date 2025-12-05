@@ -10,5 +10,6 @@ Contributors: Matthew McCreary, Drew Busz, Tyrone Chandler, William Byers.
 
 Player class- Matthew McCreary
 Question class- Drew Busz
-QuestionBank class- William Byers
+QuestionBank class- Drew Busz
 QuizGame class- Tyrone Chandler
+ScoreTracker class- William Byers
