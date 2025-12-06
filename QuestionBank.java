@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Date: 12/4/2025
  * Description: This class stores a collection of Question objects
  *             and provides access to them for the quiz game.
-*/
+ */
 
 public class QuestionBank {
 
@@ -49,4 +49,5 @@ public class QuestionBank {
     public ArrayList<Question> getQuestions() {
         return questions;
     }
+
 }
