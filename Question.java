@@ -7,7 +7,7 @@ package quizGame;
  * Description: This class represents a single quiz question,
  *             storing the question text, answer options, and
  *             the index of the correct answer.
-*/
+ */
 
 public class Question {
 
