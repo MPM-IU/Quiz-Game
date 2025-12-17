@@ -3,7 +3,7 @@ package quizGame;
 /*
  * Project: Quiz Game
  * Author: Matthew McCreary
- * Date: 12/5/2025
+ * Date: 12/17/2025
  * Description: This class represents a single player in the quiz game,
  *              storing the player's name and current score.
  */
@@ -22,7 +22,7 @@ public class Player {
         this.score = 0;
     }
 
-    // Constructor: Creates a player with an empty name and score 0 (placeholder)
+    // Constructor: Creates a player with an empty name and score 0
     public Player() {
         this.name = "";
         this.score = 0;
@@ -43,8 +43,35 @@ public class Player {
         return score;
     }
 
-    // Sets the player's current score
+    // Sets the player's score (prevents negative values)
     public void setScore(int score) {
-        this.score = score;
+        if (score < 0) {
+            this.score = 0;
+        } else {
+            this.score = score;
+        }
+    }
+
+    // Increases the player's score by 1 (standard quiz behavior)
+    public void incrementScore() {
+        score++;
+    }
+
+    // Adds a specific number of points (flexible scoring)
+    public void addPoints(int points) {
+        if (points > 0) {
+            score += points;
+        }
+    }
+
+    // Resets the player's score to 0
+    public void resetScore() {
+        score = 0;
+    }
+
+    // Returns a readable string version of the player
+    @Override
+    public String toString() {
+        return "Player{name='" + name + "', score=" + score + "}";
     }
 }
