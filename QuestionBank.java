@@ -6,7 +6,7 @@ import java.util.Collections;
 /*
  * Project: Quiz Game
  * Author: Andrew Busz
- * Date: 12/4/2025
+ * Date: 12/17/2025
  * Description: Stores and manages a collection of Question objects
  *              used by the quiz game.
  */
@@ -64,3 +64,4 @@ public class QuestionBank {
         Collections.shuffle(questions);
     }
 }
+
