@@ -6,7 +6,7 @@
  * Description: Tracks the player's quiz score, questions answered, and correct answers.
  */
 
-package quizgame;
+package quizGame;
 
 public class ScoreTracker {
 
