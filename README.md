@@ -3,7 +3,7 @@
 
 As of now the project title is a Quiz game. 
 
-It'll be a quiz game that will be based on pop culture/movies/comics. 
+It'll be a quiz game that will be simple math problems. 
 
 Contributors: Matthew McCreary, Drew Busz, Tyrone Chandler, William Byers.
 
