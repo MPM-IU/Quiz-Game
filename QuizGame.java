@@ -1,87 +1,215 @@
 /**
  *Project: Quiz Game
  *@Author: Tyrone Chandler
- *Date: 12/05/2025
+ *Date: 12/17/2025
  *Description: Manages the overall quiz game and connects the player and questions.
  */
 
 
-package quizgame;
+
+package quizGame;
 
 public class QuizGame {
 
-    private Player currentPlayer;
+    // The player taking the quiz
+    private Player player;
+
+    // The bank that stores all quiz questions
     private QuestionBank questionBank;
+
+    // Tracks the score for this quiz
+    private ScoreTracker scoreTracker;
+
+    // The index of the current question in the question bank
     private int currentQuestionIndex;
 
-    // Constructor: creates a quiz game with a player and a question bank.
-    public QuizGame(Player currentPlayer, QuestionBank questionBank) {
-        this.currentPlayer = currentPlayer;
+
+    // Creates a quiz game with player and question bank
+    public QuizGame(Player player, QuestionBank questionBank) {
+        this.player = player;
         this.questionBank = questionBank;
+        this.scoreTracker = new ScoreTracker();
         this.currentQuestionIndex = 0;
     }
 
-    // Constructor: creates a quiz game with no player and an empty question bank.
+
+    // Creates a quiz game with a default player and an empty question bank
     public QuizGame() {
-        this.currentPlayer = null;
+        this.player = new Player();
         this.questionBank = new QuestionBank();
+        this.scoreTracker = new ScoreTracker();
         this.currentQuestionIndex = 0;
     }
 
-    // returns the current player 
-    public Player getCurrentPlayer() {
-        return currentPlayer;
+
+    // Returns the current player in this quiz game
+    public Player getPlayer() {
+        return player;
     }
 
-    // sets the current player 
-    public void setCurrentPlayer(Player currentPlayer) {
-        this.currentPlayer = currentPlayer;
+
+    // Sets the current player in this quiz game
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
-    // returns the question bank
+
+    // Returns the question bank used by this quiz game
     public QuestionBank getQuestionBank() {
         return questionBank;
     }
 
-    // sets the question bank 
+
+    // Sets the question bank used by this quiz game
     public void setQuestionBank(QuestionBank questionBank) {
         this.questionBank = questionBank;
     }
 
-    // returns the index of the current question
+
+    // Returns the score tracker for this quiz game
+    public ScoreTracker getScoreTracker() {
+        return scoreTracker;
+    }
+
+
+    // Sets the score tracker for this quiz game
+    public void setScoreTracker(ScoreTracker scoreTracker) {
+        this.scoreTracker = scoreTracker;
+    }
+
+
+    // Returns the index of the current question
     public int getCurrentQuestionIndex() {
         return currentQuestionIndex;
     }
 
-    // sets the index of the current question
+
+    // Sets the index of the current question
     public void setCurrentQuestionIndex(int currentQuestionIndex) {
         this.currentQuestionIndex = currentQuestionIndex;
     }
 
-    // placeholder for starting the game 
+
+    // Starts the quiz by resetting progress and scores
     public void startGame() {
-        //  Add code to start the quiz later.
-        System.out.println("Starting the Quiz Game...");
+        currentQuestionIndex = 0;
+
+        if (scoreTracker != null) {
+            scoreTracker.reset();
+        }
+
+        if (player != null) {
+            player.resetScore();
+        }
     }
 
-    //  placeholder for asking the next question in the quiz
-    public void askNextQuestion() {
-        //  Add code to show the next question later.
-        System.out.println("Asking the next question...");
+
+    // Returns the current question, or null if there is none
+    public Question getCurrentQuestion() {
+        if (questionBank == null) {
+            return null;
+        }
+
+        if (currentQuestionIndex < 0 || currentQuestionIndex >= questionBank.size()) {
+            return null;
+        }
+
+        return questionBank.getQuestion(currentQuestionIndex);
     }
 
-    // placeholder for ending the game.
-    public void endGame() {
-        // Add code to show the final results later.
-        System.out.println("Ending the quiz game...");
+
+    // Records an answer for the current question and moves to the next one
+    public void answerCurrentQuestion(int selectedIndex) {
+        Question current = getCurrentQuestion();
+
+        if (current == null) {
+            return;
+        }
+
+        if (current.isCorrect(selectedIndex)) {
+            if (scoreTracker != null) {
+                scoreTracker.recordCorrectAnswer();
+            }
+
+            if (player != null) {
+                player.incrementScore();
+            }
+        } else {
+            if (scoreTracker != null) {
+                scoreTracker.recordIncorrectAnswer();
+            }
+        }
+
+        currentQuestionIndex++;
     }
 
-    // entry point of the program used to test the QuizGame class.
+
+    // Returns true if there are no more questions to answer
+    public boolean isGameOver() {
+        if (questionBank == null) {
+            return true;
+        }
+
+        return currentQuestionIndex >= questionBank.size();
+    }
+
+
+    // Resets the game state so the quiz can be played again
+    public void resetGame() {
+        currentQuestionIndex = 0;
+
+        if (scoreTracker != null) {
+            scoreTracker.reset();
+        }
+
+        if (player != null) {
+            player.resetScore();
+        }
+    }
+
+
+    // Main method: creates a sample game and loads math questions into the question bank
     public static void main(String[] args) {
-        Player player = new Player("Player 1");
+
         QuestionBank bank = new QuestionBank();
+
+        bank.addQuestion(new Question(
+            "What is 2 + 2?",
+            new String[] { "3", "4", "5", "6" },
+            1
+        ));
+
+        bank.addQuestion(new Question(
+            "What is 5 - 3?",
+            new String[] { "1", "2", "3", "4" },
+            1
+        ));
+
+        bank.addQuestion(new Question(
+            "What is 4 \u00d7 3?",
+            new String[] { "7", "10", "12", "14" },
+            2
+        ));
+
+        bank.addQuestion(new Question(
+            "What is 10 \u00f7 2?",
+            new String[] { "2", "4", "5", "6" },
+            2
+        ));
+
+        bank.addQuestion(new Question(
+            "What is 9 + 6?",
+            new String[] { "12", "13", "14", "15" },
+            3
+        ));
+
+        Player player = new Player("Player 1");
+
         QuizGame game = new QuizGame(player, bank);
 
-        game.startGame();
+        System.out.println("Quiz game created for " + player.getName() +
+                           " with " + bank.size() + " questions.");
     }
 }
+
+
