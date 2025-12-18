@@ -3,7 +3,7 @@ package quizGame;
 /*
  * Project: Quiz Game
  * Author: Andrew Busz
- * Date: 12/4/2025
+ * Date: 12/17/2025
  * Description: Represents a single quiz question, including the
  *              question text, answer options, and the correct answer index.
  */
