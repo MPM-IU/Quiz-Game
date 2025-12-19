@@ -29,9 +29,13 @@ Interface Functionality
 The graphical user interface displays the quiz title and instructions, followed by the current question and four answer buttons. When a user selects an answer, the interface provides immediate feedback indicating whether the answer was correct or incorrect. After all questions have been answered, the GUI displays the final score, number of correct answers, and overall accuracy. The interface is intentionally minimal to focus on functionality and clarity.
 
 How to Run the Application
+
 -Ensure Java is installed on your system.
+
 -Run the executable JAR file using the command:
+
         java -jar QuizGame.jar
+        
 -The quiz game window will open and allow the user to begin answering questions.
 
 Contributors:
